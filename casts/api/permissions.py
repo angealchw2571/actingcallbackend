@@ -18,7 +18,7 @@ class ReviewCastOrReadOnly(permissions.BasePermission):
             
             # using this profile's foreign key, accountLinked, we
             # find the relevant user id which is linked. 
-            # we compare this relevant user id, and check if it tallys
+            # we compare this relevant user id, and check if it tally
             # with current log in user id.
             return findUserId.accountLinked_id == request.user.id
 

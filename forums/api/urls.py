@@ -6,6 +6,8 @@ from django.urls import path, include
 from forums.api.views import PostsAV, PostsDetailAV, DiscussionAV ,DiscussionDetailAV
 #-------------------------------------------------------------
 
+# posts ----> thread
+# discussion ---> comments inside the thread. 
 
 urlpatterns = [
     path('posts/', PostsAV.as_view(), name='allposts'),

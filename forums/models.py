@@ -1,7 +1,7 @@
 from django.db import models
-from profiles.models import Profiles
 import datetime
 
+# remove the pesky microsecond provided which is an eyesore.
 now = datetime.datetime.now().replace(microsecond=0)
 
 class Posts(models.Model):

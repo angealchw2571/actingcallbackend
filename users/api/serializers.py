@@ -24,7 +24,6 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        # fields = "__all__"
         fields = ['username', 'email', 'id', 'profiles']
 
 
@@ -64,7 +63,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError({'error': 'Not a valid email!'})
 
 
-        # if checks are ok, pass username, email and password into accounts, which is referring to the User model.
+        # if checks are ok, pass username, email and password into account, which is referring to the User model.
         account = User(email=self.validated_data['email'], username= self.validated_data['username'])
         account.set_password(password)
         account.save()

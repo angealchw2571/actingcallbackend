@@ -9,6 +9,7 @@ class CreateCastOrReadOnly(permissions.BasePermission):
             #Check permission for read only request
             return True
         else:
+            # basically, to create cast, check if user.id exists, as this indicates there is a user logged in.
             if request.user.id:
                 return True
             else:
