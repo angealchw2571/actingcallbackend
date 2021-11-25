@@ -11,7 +11,7 @@ from profiles.api.serializers import ProfilesSerializer
 #-----------------------------------------------------
 # local files import - Models
 from profiles.models import Profiles
-
+#-----------------------------------------------------
 # local files import - Permissions
 from profiles.api.permissions import ReviewUserOrReadOnly
 from profiles.api.permissionsCreate import CreateUserOrReadOnly
@@ -29,6 +29,7 @@ class ProfilesAV(APIView):
 
     def post(self,request):
         profiles = Profiles.objects.all()
+        # permissions check here.
         self.check_object_permissions(request, profiles)
         serializer = ProfilesSerializer(data=request.data)
         if serializer.is_valid():
@@ -38,7 +39,8 @@ class ProfilesAV(APIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
             
-
+# for Profiles, filter is done by username instead of id, as it makes it easier for frontend to
+# do filtering, since username is forced to be unique as well.
 class ProfilesDetailAV(APIView):
 
     permission_classes = [IsAuthenticated, ReviewUserOrReadOnly]
@@ -59,7 +61,7 @@ class ProfilesDetailAV(APIView):
         serializer = ProfilesSerializer(profiles, data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data)
+            return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     

@@ -20,6 +20,7 @@ class CreateDiscussionOrReadOnly(permissions.BasePermission):
             #Check permission for read only request
             return True
         else:
+            # to place discussion (comment), need to check if there is a logged in user.
             if request.user.id:
                 return True
             else:

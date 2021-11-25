@@ -11,7 +11,7 @@ class ReviewPostOrReadOnly(permissions.BasePermission):
             # Check permisson for write request
             # only if logged in user has the same username as this instance, 
             # which means this instance belongs to the user, then he/she can edit
-            # or delete this profile.
+            # or delete this particular Post (thread).
             return obj.postedUser == request.user.username
 
 
@@ -25,5 +25,5 @@ class ReviewDiscussionOrReadOnly(permissions.BasePermission):
             # Check permisson for write request
             # only if logged in user has the same username as this instance, 
             # which means this instance belongs to the user, then he/she can edit
-            # or delete this profile.
+            # or delete this particular discussion (comment) made to this post.
             return obj.commentUser == request.user.username            
